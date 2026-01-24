@@ -1,6 +1,21 @@
 @import "tailwindcss";
 
-@theme inline {
+@theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --color-brand-bg: #0a0c1a;
+  --color-brand-card: #151929;
+  --color-brand-sidebar: #0f1225;
+  --color-brand-primary: #1fbdf1;
+  --color-brand-primary-hover: #199bc6;
+  --color-brand-accent: #33cc66;
+  --color-brand-text-muted: #94a3b8;
+  --color-brand-border: #2d3748;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-bg text-white antialiased;
+  }
 }
