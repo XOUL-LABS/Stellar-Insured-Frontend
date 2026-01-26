@@ -1,27 +1,43 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { PolicyCard } from "@/components/policies/PolicyCard";
 import { mockPolicies } from "@/data/mockPolicies";
 import { Search, Plus, Filter } from "lucide-react";
+import { Pagination } from "@/components/Pagination";
 
 export default function PoliciesPage() {
   const [activeTab, setActiveTab] = useState("active");
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 9;
 
-  const filteredPolicies = mockPolicies.filter((policy) => {
-    const matchesTab = policy.status === activeTab;
-    const matchesSearch =
-      policy.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      policy.policyId.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesTab && matchesSearch;
-  });
+  const filteredPolicies = useMemo(() => {
+    return mockPolicies.filter((policy) => {
+      const matchesTab = policy.status === activeTab;
+      const matchesSearch =
+        policy.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        policy.policyId.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesTab && matchesSearch;
+    });
+  }, [activeTab, searchQuery]);
+
+  const handleTabChange = (tab: typeof activeTab) => {
+    setActiveTab(tab);
+    setCurrentPage(1);
+  };
 
   const counts = {
     active: mockPolicies.filter((p) => p.status === "active").length,
     pending: mockPolicies.filter((p) => p.status === "pending").length,
     expired: mockPolicies.filter((p) => p.status === "expired").length,
   };
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedPolicies = filteredPolicies.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
 
   return (
       <div className="flex flex-col gap-8 mt-8 p-8">
@@ -53,7 +69,11 @@ export default function PoliciesPage() {
             type="text"
             placeholder="Search"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              setCurrentPage(1);
+            }
+            }
             className="w-full bg-transparent border border-brand-border rounded-lg py-3 pl-12 pr-4 focus:outline-none focus:border-brand-primary"
           />
         </div>
@@ -62,7 +82,8 @@ export default function PoliciesPage() {
           {(["active", "pending", "expired"] as const).map((tab) => (
             <button
               key={tab}
-              onClick={() => setActiveTab(tab)}
+              // onClick={() => setActiveTab(tab)}
+              onClick={() => handleTabChange(tab)}
               className={`px-4 py-2 rounded-lg font-medium transition-colors capitalize ${
                 activeTab === tab
                   ? "bg-[#1e2440] text-white"
@@ -75,15 +96,23 @@ export default function PoliciesPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredPolicies.map((policy) => (
+          {paginatedPolicies.map((policy) => (
             <PolicyCard key={policy.id} policy={policy} />
           ))}
-          {filteredPolicies.length === 0 && (
+          {paginatedPolicies.length === 0 && (
             <div className="col-span-full py-20 text-center text-brand-text-muted">
               No policies found for this status.
             </div>
           )}
         </div>
+
+        <Pagination
+          totalItems={filteredPolicies.length}
+          currentPage={currentPage}
+          itemsPerPage={itemsPerPage}
+          onPageChange={setCurrentPage}
+          className="mt-4"
+        />
       </div>
   );
 }
