@@ -1,54 +1,24 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-  /* Light theme - WCAG AA compliant colors */
-  --font-sans:
-    system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  --font-mono:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New",
-    monospace;
-
-  /* Background colors */
-  --color-bg-primary: #ffffff;
-  --color-bg-secondary: #f8fafc;
-  --color-bg-tertiary: #f1f5f9;
-  --color-bg-card: #ffffff;
-
-  /* Text colors - WCAG AA compliant (4.5:1 minimum contrast) */
-  --color-text-primary: #0f172a;
-  --color-text-secondary: #334155;
-  --color-text-muted: #475569;
-  --color-text-inverse: #ffffff;
-
-  /* Brand colors */
-  --color-brand-primary: #22bbf9;
-  --color-brand-hover: #0ea5e9;
-  --color-brand-accent: #8b5cf6;
-  --color-brand-accent-hover: #7c3aed;
-
-  /* Border colors */
-  --color-border: #e2e8f0;
-  --color-border-focus: #22bbf9;
-
-  /* Status colors - WCAG AA compliant */
-  --color-success: #15803d;
-  --color-success-bg: #dcfce7;
-  --color-warning: #b45309;
-  --color-warning-bg: #fef3c7;
-  --color-error: #b91c1c;
-  --color-error-bg: #fee2e2;
-  --color-info: #1d4ed8;
-  --color-info-bg: #dbeafe;
-
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg:
-    0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-
-  /* Animation */
+@theme {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-inter: var(--font-inter);
+  
+  --color-stellar-bg: #030712;
+  --color-stellar-card: #0f172a;
+  --color-stellar-accent: #8b5cf6; /* Violet */
+  --color-stellar-accent-hover: #7c3aed;
+  --color-stellar-secondary: #06b6d4; /* Cyan */
+  --color-brand-bg: #0a0c1a;
+  --color-brand-card: #151929;
+  --color-brand-sidebar: #0f1225;
+  --color-brand-primary: #1fbdf1;
+  --color-brand-primary-hover: #199bc6;
+  --color-brand-accent: #33cc66;
+  --color-brand-text-muted: #94a3b8;
+  --color-brand-border: #2d3748;
+  
   --animate-fade-in: fadeIn 0.5s ease-out;
   --animate-slide-up: slideUp 0.5s ease-out;
 }

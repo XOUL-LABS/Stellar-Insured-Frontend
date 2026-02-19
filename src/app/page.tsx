@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/auth-provider";
 import HeroSection from "@/components/HeroSection";
 import { HowItWorksSection } from "@/components/HowItWorksSection";
+import ReadyToSecureSection from "@/components/ReadyToSecureSection";
 import NavBar from "@/components/NavBar/NavBar";
 
 export default function Home() {
@@ -10,12 +11,13 @@ export default function Home() {
   const { session, signOut } = useAuth();
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-bg-primary dark:bg-[#030712] relative">
+    <div className="flex min-h-screen flex-col bg-white dark:bg-zinc-950 relative">
       <NavBar />
-      <main className="flex flex-col items-center justify-center gap-8 p-8 text-center w-full">
+      <main className="flex flex-col">
           <HeroSection />
           <HowItWorksSection />
-      </main>
+          <ReadyToSecureSection />
+        </main>
     </div>
   );
 }
