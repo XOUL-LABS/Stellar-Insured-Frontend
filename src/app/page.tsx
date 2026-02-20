@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/auth-provider";
 import HeroSection from "@/components/HeroSection";
 import { HowItWorksSection } from "@/components/HowItWorksSection";
+import KeyFeaturesSection from "@/components/KeyFeaturesSection";
 import ReadyToSecureSection from "@/components/ReadyToSecureSection";
 import NavBar from "@/components/NavBar/NavBar";
 
@@ -16,6 +17,7 @@ export default function Home() {
       <main className="flex flex-col">
           <HeroSection />
           <HowItWorksSection />
+          <KeyFeaturesSection />
           <ReadyToSecureSection />
         </main>
     </div>
